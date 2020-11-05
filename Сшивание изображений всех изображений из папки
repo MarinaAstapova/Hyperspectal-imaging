@@ -4,7 +4,6 @@ import numpy as np
  
 try_use_gpu =False
 imgs = []
-result_name = 'result.jpg'
  
 pic_dir = 'Landsat8/NIR/'
 for root, dirs, files in os.walk(pic_dir):
@@ -21,8 +20,9 @@ for root, dirs, files in os.walk(pic_dir):
         #Landsat8/NIR/NirImage1 (7).jpg
         #Landsat8/NIR/NirImage1 (8).jpg
         #Landsat8/NIR/NirImage1 (9).jpg
+ 
 stitcher = cv2.createStitcher(try_use_gpu=try_use_gpu)
 retavol, pano = stitcher.stitch(imgs)
 result = cv2.resize(pano, (int(pano.shape[1]/2), int(pano.shape[0]/2)))
- # Display stitching results
+#Save stitching results to forlder
 cv2.imwrite('NIR_test.jpg',result)
