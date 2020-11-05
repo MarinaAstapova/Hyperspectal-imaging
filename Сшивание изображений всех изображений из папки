@@ -25,4 +25,4 @@ stitcher = cv2.createStitcher(try_use_gpu=try_use_gpu)
 retavol, pano = stitcher.stitch(imgs)
 result = cv2.resize(pano, (int(pano.shape[1]/2), int(pano.shape[0]/2)))
  # Display stitching results
-cv2.imwrite('result.jpg',result)
+cv2.imwrite('NIR_test.jpg',result)
