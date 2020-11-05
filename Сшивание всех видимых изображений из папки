@@ -1,0 +1,29 @@
+import cv2
+import os
+import numpy as np
+ 
+try_use_gpu =False
+imgs = []
+ 
+pic_dir = 'Landsat8/Vis/'
+
+for root, dirs, files in os.walk(pic_dir):
+    for file in files:
+        print(os.path.join(root, file))
+        imgs.append(cv2.imread(os.path.join(root, file)))
+        #Output
+        #Landsat8/Vis/VisImage1 (1).jpg
+        #Landsat8/Vis/VisImage1 (10).jpg
+        #Landsat8/Vis/VisImage1 (2).jpg
+        #Landsat8/Vis/VisImage1 (3).jpg
+        #Landsat8/Vis/VisImage1 (4).jpg
+        #Landsat8/Vis/VisImage1 (5).jpg
+        #Landsat8/Vis/VisImage1 (6).jpg
+        #Landsat8/Vis/VisImage1 (7).jpg
+        #Landsat8/Vis/VisImage1 (8).jpg
+        #Landsat8/Vis/VisImage1 (9).jpg
+stitcher = cv2.createStitcher(try_use_gpu=try_use_gpu)
+retavol, pano = stitcher.stitch(imgs)
+result = cv2.resize(pano, (int(pano.shape[1]/2), int(pano.shape[0]/2)))
+ # Save stitching results to folder
+cv2.imwrite('Vis_test.jpg',result)
