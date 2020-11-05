@@ -1,0 +1,28 @@
+import cv2
+import os
+import numpy as np
+ 
+try_use_gpu =False
+imgs = []
+result_name = 'result.jpg'
+ 
+pic_dir = 'Landsat8/NIR/'
+for root, dirs, files in os.walk(pic_dir):
+    for file in files:
+        print(os.path.join(root, file))
+        imgs.append(cv2.imread(os.path.join(root, file)))
+        #Output
+        #Landsat8/NIR/NirImage1 (10).jpg
+        #Landsat8/NIR/NirImage1 (2).jpg
+        #Landsat8/NIR/NirImage1 (3).jpg
+        #Landsat8/NIR/NirImage1 (4).jpg
+        #Landsat8/NIR/NirImage1 (5).jpg
+        #Landsat8/NIR/NirImage1 (6).jpg
+        #Landsat8/NIR/NirImage1 (7).jpg
+        #Landsat8/NIR/NirImage1 (8).jpg
+        #Landsat8/NIR/NirImage1 (9).jpg
+stitcher = cv2.createStitcher(try_use_gpu=try_use_gpu)
+retavol, pano = stitcher.stitch(imgs)
+result = cv2.resize(pano, (int(pano.shape[1]/2), int(pano.shape[0]/2)))
+ # Display stitching results
+cv2.imwrite('result.jpg',result)
