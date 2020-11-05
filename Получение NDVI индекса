@@ -30,4 +30,4 @@ fig, ax = plt.subplots(1, 1, figsize=(18, 12))
 plot.show(ndvi, ax, cmap='RdYlGn')
 
 fig, ax = plt.subplots(1, 1, figsize=(18, 12))
-plot.show(ndvi, ax, cmap='RdYlGn', vmin=-0.1, vmax=1)
+plot.show(ndvi, ax, cmap='RdYlGn', vmin=-0.01, vmax=1)
